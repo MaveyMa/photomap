@@ -15,7 +15,7 @@ class LocationCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var location: NSDictionary! {
+    @objc var location: NSDictionary! {
         didSet {
             nameLabel.text = location["name"] as? String
             addressLabel.text = location.value(forKeyPath: "location.address") as? String

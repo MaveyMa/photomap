@@ -11,13 +11,13 @@ import UIKit
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     // TODO: Fill in actual CLIENT_ID and CLIENT_SECRET
-    let CLIENT_ID = "CLIENT_ID GOES HERE"
-    let CLIENT_SECRET = "CLIENT_SECRET GOES HERE"
+    @objc let CLIENT_ID = "QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL"
+    @objc let CLIENT_SECRET = "W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU"
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var results: NSArray = []
+    @objc var results: NSArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         fetchLocations(searchBar.text!)
     }
     
-    func fetchLocations(_ query: String, near: String = "San Francisco") {
+    @objc func fetchLocations(_ query: String, near: String = "San Francisco") {
         let baseUrlString = "https://api.foursquare.com/v2/venues/search?"
         let queryString = "client_id=\(CLIENT_ID)&client_secret=\(CLIENT_SECRET)&v=20141020&near=\(near),CA&query=\(query)"
 

@@ -7,29 +7,39 @@
 //
 
 import UIKit
+import MapKit
 
 class PhotoMapViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
+  @IBOutlet weak var myMapView: MKMapView!
+  @IBOutlet weak var cameraButton: UIButton!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-
+    //one degree of latitude is approximately 111 kilometers (69 miles) at all times.
+    let sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667),
+                                          MKCoordinateSpanMake(0.1, 0.1))
+    myMapView.setRegion(sfRegion, animated: false)
     
-    // MARK: - Navigation
+    cameraButton.layer.cornerRadius = cameraButton.frame.height/2
+    cameraButton.layer.borderWidth = 2
+    cameraButton.layer.borderColor = UIColor.white.cgColor
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    
-
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+  }
+  
+  
 }
