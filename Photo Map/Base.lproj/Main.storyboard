@@ -33,6 +33,9 @@
                                     <constraint firstAttribute="height" constant="100" id="bNs-RE-Hv1"/>
                                 </constraints>
                                 <state key="normal" image="camera"/>
+                                <connections>
+                                    <action selector="onTouchCameraButton:" destination="ghP-Ww-KKQ" eventType="touchUpInside" id="BqM-4M-SzV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
