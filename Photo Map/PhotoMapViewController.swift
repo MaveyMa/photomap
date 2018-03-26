@@ -9,7 +9,9 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController,
+  LocationsViewControllerDelegate,
+ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   @IBOutlet weak var myMapView: MKMapView!
   @IBOutlet weak var cameraButton: UIButton!
@@ -49,7 +51,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
     
     // Do something with the images (based on your use case)
-  
+    
     // Dismiss UIImagePickerController to go back to your original view controller, a
     dismiss(animated: false) {
       // Launch the LocationsViewController
@@ -69,21 +71,24 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     cameraButton.layer.borderWidth = 2
     cameraButton.layer.borderColor = UIColor.white.cgColor
   }
+  // Pass the selected object to the new view controller.
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
-
+  
   // MARK: - Navigation
   
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
     if segue.identifier == "tagSegue" {
+      // Pass the selected object to the new view controller.
       let destinationViewController = segue.destination as! LocationsViewController
+      destinationViewController.delegate = self
     }
-    // Pass the selected object to the new view controller.
+    
   }
   
   
