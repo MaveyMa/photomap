@@ -31,8 +31,6 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     vc.allowsEditing = true
     //vc.sourceType = UIImagePickerControllerSourceType.camera
     
-    self.present(vc, animated: true, completion: nil)
-    
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       print("Camera is available 📸")
       vc.sourceType = .camera
@@ -40,6 +38,8 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
       print("Camera 🚫 available so we will use photo library instead")
       vc.sourceType = .photoLibrary
     }
+    
+    self.present(vc, animated: true, completion: nil)
   }
   
   func imagePickerController(_ picker: UIImagePickerController,
@@ -49,9 +49,12 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
     
     // Do something with the images (based on your use case)
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
-    dismiss(animated: true, completion: nil)
+  
+    // Dismiss UIImagePickerController to go back to your original view controller, a
+    dismiss(animated: false) {
+      // Launch the LocationsViewController
+      self.performSegue(withIdentifier: "tagSegue", sender: nil)
+    }
   }
   
   func setInitialMapLocation() {
@@ -77,6 +80,9 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
+    if segue.identifier == "tagSegue" {
+      let destinationViewController = segue.destination as! LocationsViewController
+    }
     // Pass the selected object to the new view controller.
   }
   
