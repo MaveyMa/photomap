@@ -92,6 +92,9 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
       // Pass the selected object to the new view controller.
       let destinationViewController = segue.destination as! LocationsViewController
       destinationViewController.delegate = self
+    } else if segue.identifier == "fullImageSegue" {
+      let destinationViewController = segue.destination as! FullImageViewController
+      destinationViewController.bigImageView.image = fullImage
     }
   }
   
@@ -116,11 +119,16 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
       annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
       annotationView!.canShowCallout = true
       annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+      annotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
     }
     let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
     imageView.image = previewImage
     
     return annotationView
+  }
+  
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    self.performSegue(withIdentifier: "fullImageSegue", sender: nil)
   }
 
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class FullImageViewController: UIViewController {
   
+  @IBOutlet weak var bigImageView: UIImageView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     

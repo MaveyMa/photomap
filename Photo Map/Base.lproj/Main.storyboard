@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="jTD-rF-wIY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="jTD-rF-wIY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,7 +48,9 @@
                             <constraint firstAttribute="bottom" secondItem="izJ-mT-rfr" secondAttribute="bottom" id="YBr-AF-FOZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aPF-0T-Ydb"/>
+                    <navigationItem key="navigationItem" id="aPF-0T-Ydb">
+                        <barButtonItem key="backBarButtonItem" title="Photo Map" id="vGl-Gh-zU4"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="cameraButton" destination="Rfx-O9-hAx" id="ABO-Si-1ST"/>
                         <outlet property="myMapView" destination="izJ-mT-rfr" id="vOK-nW-bog"/>
@@ -60,7 +62,7 @@
             </objects>
             <point key="canvasLocation" x="640.5" y="-3.5"/>
         </scene>
-        <!--Full Image View Controller-->
+        <!--Full Image-->
         <scene sceneID="VWW-Rb-sI4">
             <objects>
                 <viewController id="WeT-38-qba" customClass="FullImageViewController" customModule="Photo_Map" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,9 +73,25 @@
                     <view key="view" contentMode="scaleToFill" id="IER-PT-2nq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ofn-Gl-OwL">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ofn-Gl-OwL" firstAttribute="top" secondItem="FF8-mr-LhG" secondAttribute="bottom" id="FtY-b6-4J2"/>
+                            <constraint firstAttribute="trailing" secondItem="Ofn-Gl-OwL" secondAttribute="trailing" id="HBu-aY-vGM"/>
+                            <constraint firstItem="N8d-FM-OAP" firstAttribute="top" secondItem="Ofn-Gl-OwL" secondAttribute="bottom" id="Pz3-Sb-0gm"/>
+                            <constraint firstItem="Ofn-Gl-OwL" firstAttribute="leading" secondItem="IER-PT-2nq" secondAttribute="leading" id="S4r-CL-EhR"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HUo-VF-R6y"/>
+                    <navigationItem key="navigationItem" title="Full Image" id="HUo-VF-R6y">
+                        <barButtonItem key="backBarButtonItem" title="Photo Map" id="glJ-lC-fC7"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bigImageView" destination="Ofn-Gl-OwL" id="lwf-WO-wOD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRl-fe-rlf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
