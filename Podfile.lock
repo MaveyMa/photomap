@@ -14,13 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Toucan (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
+  - Toucan
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Toucan: 61867fb10948c02e9804280a95eb183e98eac97a
 
-PODFILE CHECKSUM: 3e356816e950f37968e867777843b180ef268b50
+PODFILE CHECKSUM: d8ff5d94a732df95cebf16ab3ef1b49380c94c74
 
 COCOAPODS: 1.4.0

@@ -8,17 +8,21 @@
 
 import UIKit
 import MapKit
+import Toucan
 
-class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate {
 
   @IBOutlet weak var myMapView: MKMapView!
   @IBOutlet weak var cameraButton: UIButton!
+  var previewImage: UIImage!
+  var fullImage: UIImage!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setInitialMapLocation()
     configureCameraButton()
+    myMapView.delegate = self
     
   }
   @IBAction func onTouchCameraButton(_ sender: Any) {
@@ -48,8 +52,11 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
     let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
     let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
     
-    // Do something with the images (based on your use case)
+    let resizedImage = Toucan.Resize.resizeImage(editedImage, size: CGSize(width: 45, height: 45))
     
+    // Do something with the images (based on your use case)
+    fullImage = originalImage
+    previewImage = resizedImage
     // Dismiss UIImagePickerController to go back to your original view controller, a
     dismiss(animated: false) {
       // Launch the LocationsViewController
@@ -90,8 +97,39 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
   
   // Conform to the LocationsViewControllerDelegate protocol
   func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+    
+    let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as! Double, longitude: longitude as! Double)
+    let annotation = PhotoAnnotation()
+    annotation.coordinate = locationCoordinate
+    annotation.photo = previewImage
+    myMapView.addAnnotation(annotation)
+    
     self.navigationController? .popToViewController(self, animated: true)
   }
   
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    let reuseID = "myAnnotationView"
+    
+    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+    
+    if (annotationView == nil) {
+      annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+      annotationView!.canShowCallout = true
+      annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+    }
+    let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
+    imageView.image = previewImage
+    
+    return annotationView
+  }
+
+}
+
+class PhotoAnnotation: NSObject, MKAnnotation {
+  var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
+  var photo: UIImage!
   
+  var title: String? {
+    return "\(coordinate.latitude)"
+  }
 }
