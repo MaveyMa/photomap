@@ -9,10 +9,8 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController,
-  LocationsViewControllerDelegate,
- UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
+class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
   @IBOutlet weak var myMapView: MKMapView!
   @IBOutlet weak var cameraButton: UIButton!
   
@@ -88,7 +86,11 @@ class PhotoMapViewController: UIViewController,
       let destinationViewController = segue.destination as! LocationsViewController
       destinationViewController.delegate = self
     }
-    
+  }
+  
+  // Conform to the LocationsViewControllerDelegate protocol
+  func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+    self.navigationController? .popToViewController(self, animated: true)
   }
   
   
