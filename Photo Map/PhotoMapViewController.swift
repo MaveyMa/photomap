@@ -16,6 +16,8 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
   @IBOutlet weak var cameraButton: UIButton!
   var previewImage: UIImage!
   var fullImage: UIImage!
+  var selectedAnnotation: PhotoAnnotation?
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -94,7 +96,7 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
       destinationViewController.delegate = self
     } else if segue.identifier == "fullImageSegue" {
       let destinationViewController = segue.destination as! FullImageViewController
-      destinationViewController.bigImage = fullImage
+      destinationViewController.bigImage = selectedAnnotation?.photo
     }
   }
   
@@ -104,7 +106,7 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
     let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as! Double, longitude: longitude as! Double)
     let annotation = PhotoAnnotation()
     annotation.coordinate = locationCoordinate
-    annotation.photo = previewImage
+    annotation.photo = fullImage
     myMapView.addAnnotation(annotation)
     
     self.navigationController? .popToViewController(self, animated: true)
@@ -128,6 +130,7 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
   }
   
   func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    self.selectedAnnotation = view.annotation as? PhotoAnnotation
     self.performSegue(withIdentifier: "fullImageSegue", sender: nil)
   }
 
