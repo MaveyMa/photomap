@@ -11,11 +11,14 @@ import UIKit
 class FullImageViewController: UIViewController {
   
   @IBOutlet weak var bigImageView: UIImageView!
-  
+  var bigImage: UIImage?
+
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    if let image = self.bigImage {
+      self.bigImageView.image = image
+    }
   }
   
   override func didReceiveMemoryWarning() {

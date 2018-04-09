@@ -94,7 +94,7 @@ class PhotoMapViewController: UIViewController, LocationsViewControllerDelegate,
       destinationViewController.delegate = self
     } else if segue.identifier == "fullImageSegue" {
       let destinationViewController = segue.destination as! FullImageViewController
-      destinationViewController.bigImageView.image = fullImage
+      destinationViewController.bigImage = fullImage
     }
   }
   
